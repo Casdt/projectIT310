@@ -1,5 +1,4 @@
 <?php
-// Security improvements
 $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
 $maxFileSize = 2 * 1024 * 1024; // 2MB
 $uploadDir = "uploads/";
@@ -17,7 +16,12 @@ foreach ($xml->student as $s) {
         $s->adviser = htmlspecialchars($_POST['adviser']);
         $s->school_year = htmlspecialchars($_POST['school_year']);
 
-        // Handle file upload if provided
+        // 🔓 Store password as plain text if new one is provided
+        if (!empty($_POST['password'])) {
+            $s->password = htmlspecialchars($_POST['password']);
+        }
+
+        // Handle profile picture upload
         if (!empty($_FILES["profile_picture"]["name"])) {
             $filename = basename($_FILES["profile_picture"]["name"]);
             $fileExtension = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
@@ -46,11 +50,11 @@ foreach ($xml->student as $s) {
     }
 }
 
-// Save with error handling
+// Save and redirect
 if (!$xml->asXML("students.xml")) {
     die("Error: Could not update student data.");
 }
 
-header("Location: index.php");
+header("Location: students.php");
 exit();
 ?>

@@ -29,6 +29,6 @@ if (!$xml->asXML("students.xml")) {
     die("Error: Could not delete student.");
 }
 
-header("Location: index.php");
+header("Location: students.php");
 exit();
 ?>

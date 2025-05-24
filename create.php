@@ -31,6 +31,7 @@ if (!move_uploaded_file($_FILES["profile_picture"]["tmp_name"], $uploadFile)) {
 
 // Sanitize input data
 $name = htmlspecialchars($_POST['name']);
+$password = htmlspecialchars($_POST['password']); // NEW
 $course = htmlspecialchars($_POST['course']);
 $year_level = htmlspecialchars($_POST['year_level']);
 $section = htmlspecialchars($_POST['section']);
@@ -41,6 +42,7 @@ $school_year = htmlspecialchars($_POST['school_year']);
 $newStudent = $xml->addChild("student");
 $newStudent->addChild("id", $id);
 $newStudent->addChild("name", $name);
+$newStudent->addChild("password", $password); // NEW
 $newStudent->addChild("profile_picture", $uploadFile);
 $newStudent->addChild("course", $course);
 $newStudent->addChild("year_level", $year_level);
@@ -54,6 +56,7 @@ if (!$xml->asXML("students.xml")) {
     die("Error: Could not save student data.");
 }
 
-header("Location: index.php");
+// create.php (after adding student)
+header("Location: students.php");
 exit();
 ?>

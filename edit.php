@@ -185,19 +185,24 @@ foreach ($xml->student as $s) {
                 <input type="text" name="school_year" value="<?= htmlspecialchars($student->school_year) ?>" required>
             </div>
 
+            <!-- New password input -->
+            <div class="form-group">
+                <label>Password (leave blank to keep current password)</label>
+                <input type="password" name="password" placeholder="New Password">
+            </div>
+
             <button type="submit">Update Student</button>
         </form>
 
-        <form action="index.php" method="get" style="margin-top: 15px;">
-    <button type="submit" class="button-secondary">Back to Student List</button>
-</form>
-
+        <form action="students.php" method="get" style="margin-top: 15px;">
+            <button type="submit" class="button-secondary">Back to Student List</button>
+        </form>
     </div>
 <?php else: ?>
     <div class="edit-form-container">
         <h1>Student Not Found</h1>
         <p>The requested student could not be found.</p>
-        <a href="index.php" class="back-link">Back to Student List</a>
+        <a href="students.php" class="back-link">Back to Student List</a>
     </div>
 <?php endif; ?>
 </body>
